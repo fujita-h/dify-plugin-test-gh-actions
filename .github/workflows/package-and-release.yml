@@ -21,7 +21,7 @@ jobs:
       - name: Install dify tools
         run: |
           if [ -f ./.devcontainer/download_dify_tools.sh ]; then
-            sudo ./.devcontainer/download_dify_tools.sh
+            sudo bash ./.devcontainer/download_dify_tools.sh
           fi
       - name: Get pushed commits
         id: get_commits
