@@ -8,6 +8,10 @@ jobs:
   package-and-release:
     runs-on: ubuntu-latest
     steps:
+      - name: install yq
+        run: |
+          sudo apt-get update
+          sudo apt-get install yq
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
@@ -18,29 +22,27 @@ jobs:
           git log ${{ github.event.before }}..${{ github.sha }} --pretty=format:"%H" > commits.txt
       - name: Process commits and create tags
         id: process_commits
-        uses: mikefarah/yq@v4
-        with:
-          run: |
-            while read COMMIT_HASH; do
-              echo "Processing commit $COMMIT_HASH"
-              git checkout $COMMIT_HASH
-              if [ -f manifest.yaml ]; then
-                echo "Found manifest.yaml"
-                # Extract version from manifest.yaml
-                VERSION=$(yq -r '.version' manifest.yaml)
-                echo "Version: $VERSION"
-                TAG="v{$VERSION}"
-                if git rev-parse $TAG > /dev/null 2>&1; then
-                  echo "Tag $TAG already exists"
-                  continue
-                fi
-                # Create a tag
-                git tag $VERSION $COMMIT_HASH
-                echo "Created tag $VERSION"
-              else
-                echo "No manifest.yaml found"
+        run: |
+          while read COMMIT_HASH; do
+            echo "Processing commit $COMMIT_HASH"
+            git checkout $COMMIT_HASH
+            if [ -f manifest.yaml ]; then
+              echo "Found manifest.yaml"
+              # Extract version from manifest.yaml
+              VERSION=$(yq -r '.version' manifest.yaml)
+              echo "Version: $VERSION"
+              TAG="v{$VERSION}"
+              if git rev-parse $TAG > /dev/null 2>&1; then
+                echo "Tag $TAG already exists"
+                continue
               fi
-            done < commits.txt
+              # Create a tag
+              git tag $VERSION $COMMIT_HASH
+              echo "Created tag $VERSION"
+            else
+              echo "No manifest.yaml found"
+            fi
+          done < commits.txt
             
 
 
