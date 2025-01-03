@@ -33,7 +33,7 @@ jobs:
               # Extract version from manifest.yaml
               VERSION=$(yq -r '.version' manifest.yaml)
               echo "Version: $VERSION"
-              TAG="v{$VERSION}"
+              TAG="v$VERSION"
               if git rev-parse $TAG > /dev/null 2>&1; then
                 echo "Tag $TAG already exists"
                 continue
