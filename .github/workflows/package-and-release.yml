@@ -39,11 +39,11 @@ jobs:
                 continue
               fi
               # Create a tag
-              git tag $VERSION $COMMIT_HASH
-              echo "Created tag $VERSION"
+              git tag $TAG $COMMIT_HASH
+              echo "Created tag $TAG"
               # Push the tag
-              git push origin $VERSION
-              echo "Pushed tag $VERSION"
+              git push origin $TAG
+              echo "Pushed tag $TAG"
             else
               echo "No manifest.yaml found"
             fi
