@@ -16,7 +16,7 @@ jobs:
           sudo chmod +x /usr/bin/yq
       - name: install dify-plugin cli
         run: |
-          sudo ./devcontainer/download_dify_tools.sh
+          sudo ./.devcontainer/download_dify_tools.sh
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
