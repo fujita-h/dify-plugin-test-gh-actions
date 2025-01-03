@@ -19,7 +19,7 @@ jobs:
       - name: Get pushed commits
         id: get_commits
         run: | 
-          git log ${{ github.event.before }}..${{ github.sha }} --pretty=format:"%H" | grep '' > commits.txt
+          git log ${{ github.event.before }}..${{ github.sha }} --pretty=format:"%H" | grep '' > ../commits.txt
       - name: Process commits and create tags
         id: process_commits
         run: |
@@ -39,10 +39,13 @@ jobs:
               # Create a tag
               git tag $VERSION $COMMIT_HASH
               echo "Created tag $VERSION"
+              # Push the tag
+              git push origin $VERSION
+              echo "Pushed tag $VERSION"
             else
               echo "No manifest.yaml found"
             fi
-          done < commits.txt
+          done < ../commits.txt
             
 
 
