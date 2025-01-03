@@ -1,0 +1,17 @@
+identity:
+  author: fujita-h
+  name: test-gh-actions
+  label:
+    en_US: test-gh-actions
+    zh_Hans: test-gh-actions
+    pt_BR: test-gh-actions
+  description:
+    en_US: test-gh-actions
+    zh_Hans: test-gh-actions
+    pt_BR: test-gh-actions
+  icon: icon.svg
+tools:
+  - tools/test-gh-actions.yaml
+extra:
+  python:
+    source: provider/test-gh-actions.py

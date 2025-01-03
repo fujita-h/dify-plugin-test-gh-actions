@@ -1,0 +1,30 @@
+identity:
+  name: test-gh-actions
+  author: fujita-h
+  label:
+    en_US: test-gh-actions
+    zh_Hans: test-gh-actions
+    pt_BR: test-gh-actions
+description:
+  human:
+    en_US: test-gh-actions
+    zh_Hans: test-gh-actions
+    pt_BR: test-gh-actions
+  llm: test-gh-actions
+parameters:
+  - name: query
+    type: string
+    required: true
+    label:
+      en_US: Query string
+      zh_Hans: 查询语句
+      pt_BR: Query string
+    human_description:
+      en_US: test-gh-actions
+      zh_Hans: test-gh-actions
+      pt_BR: test-gh-actions
+    llm_description: test-gh-actions
+    form: llm
+extra:
+  python:
+    source: tools/test-gh-actions.py
